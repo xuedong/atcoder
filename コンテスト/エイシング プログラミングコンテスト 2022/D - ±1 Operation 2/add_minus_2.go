@@ -5,55 +5,42 @@ import (
 	"sort"
 )
 
-func binarySearch(target int64, nums []int64) int64 {
-	var left, right int64
-	left, right = 0, int64(len(nums)) - 1
-
-	for left <= right {
-		mid := left + (right - left) / 2
-
-		if nums[mid] < target {
-			left = mid + 1
-		} else {
-			right = mid - 1
-		}
-	}
-
-	return left
-}
-
 func main()  {
-	var n, q int64
+	var n, q int
 	fmt.Scanf("%v %v", &n, &q)
 
-	nums := make([]int64, n)
-	prefixes := make([]int64, n)
-	var i int64
-	for i = 0; i < n; i++ {
-		fmt.Scanf("%v", &nums[i])
-		if i == 0 {
-			prefixes[i] = nums[i]
-		} else {
-			prefixes[i] = prefixes[i-1] + nums[i]
-		}
+	nums := make([]int, n)
+	for i := 0; i < n; i++ {
+		fmt.Scanf("%d", &nums[i])
+	}
+	sort.Ints(nums)
+
+	prefixes := make([]int64, n+1)
+	for i := 1; i <= n; i++ {
+		prefixes[i] = prefixes[i-1] + int64(nums[i-1])
 	}
 
-	for i = 0; i < n; i++ {
-		nums[]
-	}
-	sort.Int64s(nums)
-
-	var j int64
-	for j = 1; j <= q; j++ {
-		var target int64
+	for j := 1; j <= q; j++ {
+		var target int
 		fmt.Scanf("%v", &target)
-		id := binarySearch(target, nums)
+
+		left, right := 0, len(nums) - 1
+
+		for left <= right {
+			mid := left + (right - left) / 2
+
+			if nums[mid] < target {
+				left = mid + 1
+			} else {
+				right = mid - 1
+			}
+		}
 
 		var ans int64
-		ans = id * target
-    	ans -= prefixes[id]
-    	ans += prefixes[n] - prefixes[id]
-    	ans -= (n - id) * target
+		ans = int64(left) * int64(target)
+    	ans -= prefixes[right+1]
+    	ans += prefixes[n] - prefixes[left]
+    	ans -= int64((n - left)) * int64(target)
 		fmt.Printf("%v\n", ans)
 	}
 }
