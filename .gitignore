@@ -1,5 +1,8 @@
-# Mac
+# macOS
 .DS_Store
+
+# IDE
+.vscode
 
 # Haskell
 dist
