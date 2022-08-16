@@ -6,4 +6,3 @@ let () =
   	let ans = a + (List.fold_left (+) 0 list) in
   	Printf.printf "%d %s\n" ans text;
 ;;
-
