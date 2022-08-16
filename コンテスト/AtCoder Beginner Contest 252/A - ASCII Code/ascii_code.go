@@ -6,8 +6,8 @@ import (
 
 func main() {
 	var n int
-  	fmt.Scanf("%d", &n)
+	fmt.Scanf("%d", &n)
 
-  	character := string(n)
-  	fmt.Printf(character)
+	character := string(rune(n))
+	fmt.Printf(character)
 }
